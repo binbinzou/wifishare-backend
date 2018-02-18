@@ -20,7 +20,7 @@ hystrix:
             timeoutInMilliseconds: 600000
 ---
 spring:
-  profiles: dev 
+  profiles: local 
   application:
     name: wifishare
   datasource:
@@ -36,6 +36,31 @@ spring:
   redis:
     database: 0
     host: 127.0.0.1
+    port: 6379
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+    timeout: 5000
+---
+spring:
+  profiles: dev 
+  application:
+    name: wifishare
+  datasource:
+    url: jdbc:mysql://13.126.19.53:3306/wifishared
+    username: wifishared
+    password: 1qaz@WSX
+    driver-class-name: com.mysql.jdbc.Driver
+  activemq:
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    pool:
+      enabled: false
+  redis:
+    database: 0
+    host: 13.126.19.53
     port: 6379
     pool:
       max-idle: 8
