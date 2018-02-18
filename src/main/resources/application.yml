@@ -7,6 +7,7 @@ logging:
   level:
     root: ERROR
     com.wifishared: DEBUG
+    com.shanghai: DEBUG
     org.springframework: INFO
     sun.net.www: INFO
     org.hibernate: INFO
