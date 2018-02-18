@@ -14,7 +14,7 @@ import java.math.BigInteger;
  * 
  */
 @Entity
-@Table(name="order_detail")
+@Table(name="ORDER_DETAIL")
 @NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
 public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,8 @@
 package com.shanghai.wifishare.wifimgmt.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -11,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
  * 
  */
 @Entity
-@Table(name="hotspot_connect")
+@Table(name="HOTSPOT_CONNECT")
 @NamedQuery(name="HotspotConnect.findAll", query="SELECT h FROM HotspotConnect h")
 public class HotspotConnect implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,8 +23,8 @@ public class HotspotConnect implements Serializable {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String id;
 
-	@Column(name="CONNECT_NUM")
-	private int connectNum;
+	@Column(name="CREATE_TIME",insertable=false,updatable=false)
+	private Timestamp createTime;
 
 	@Column(name="DEVICE_ID")
 	private String deviceId;
@@ -44,12 +46,12 @@ public class HotspotConnect implements Serializable {
 		this.id = id;
 	}
 
-	public int getConnectNum() {
-		return this.connectNum;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
 
-	public void setConnectNum(int connectNum) {
-		this.connectNum = connectNum;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getDeviceId() {

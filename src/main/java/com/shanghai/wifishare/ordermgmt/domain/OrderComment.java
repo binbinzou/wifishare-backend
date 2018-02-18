@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="order_comment")
+@Table(name="ORDER_COMMENT")
 @NamedQuery(name="OrderComment.findAll", query="SELECT o FROM OrderComment o")
 public class OrderComment implements Serializable {
 	private static final long serialVersionUID = 1L;

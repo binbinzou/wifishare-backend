@@ -24,11 +24,22 @@ spring:
   profiles: local 
   application:
     name: wifishare
+  jpa:
+    show-sql: false
+    database: MYSQL
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
   datasource:
-    url: jdbc:mysql://localhost:3306/wifishared
+    url: jdbc:mysql://localhost:3306/wifishared?useUnicode=true&amp;characterEncoding=utf8
     username: wifishared
     password: 1qaz@WSX
     driver-class-name: com.mysql.jdbc.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1  
   activemq:
     broker-url: tcp://localhost:61616
     in-memory: true

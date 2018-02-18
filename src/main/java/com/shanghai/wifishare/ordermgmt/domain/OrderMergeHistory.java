@@ -14,7 +14,7 @@ import java.math.BigInteger;
  * 
  */
 @Entity
-@Table(name="order_merge_history")
+@Table(name="ORDER_MERGE_HISTORY")
 @NamedQuery(name="OrderMergeHistory.findAll", query="SELECT o FROM OrderMergeHistory o")
 public class OrderMergeHistory implements Serializable {
 	private static final long serialVersionUID = 1L;

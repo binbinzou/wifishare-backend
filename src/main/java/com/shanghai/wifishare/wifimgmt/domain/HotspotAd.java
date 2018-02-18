@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="hotspot_ad")
+@Table(name="HOTSPOT_AD")
 @NamedQuery(name="HotspotAd.findAll", query="SELECT h FROM HotspotAd h")
 public class HotspotAd implements Serializable {
 	private static final long serialVersionUID = 1L;

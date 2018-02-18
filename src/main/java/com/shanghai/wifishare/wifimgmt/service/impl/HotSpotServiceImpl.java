@@ -189,11 +189,10 @@ public class HotSpotServiceImpl implements HotSpotService {
 			String hotSpotId = iterator.next();
 			//计算设备连接数和连接次数
 			List<HotspotConnect> connectTmps = hotspotConnectMap.get(hotSpotId);
-			int deviceNum = connectTmps.size();
-			int connectNum = 0;
-			for(HotspotConnect connect : connectTmps) {
-				connectNum += connect.getConnectNum();
-			}
+			//设备的连接次数
+			int deviceNum = connectTmps.stream().map(HotspotConnect::getDeviceId).collect(Collectors.toSet()).size();
+			//总共的连接次数
+			int connectNum = connectTmps.size();
 			spotOtherMsg.setDeviceNum(deviceNum);
 			spotOtherMsg.setConnectNum(connectNum);
 			//计算评价
@@ -333,10 +332,6 @@ public class HotSpotServiceImpl implements HotSpotService {
 				x.setStrengthScore(msgTmp==null?"0" : df.format(msgTmp.getStrengthScore()));
 			});
 		}
-		
-		
-		
-		
 		return result;
 	}
 

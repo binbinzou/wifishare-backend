@@ -26,6 +26,9 @@ import com.shanghai.wifishare.ordermgmt.utils.OrderDetailConverter;
 import com.shanghai.wifishare.ordermgmt.utils.OrderMergeConverter;
 import com.shanghai.wifishare.ordermgmt.utils.OrderMergeDataCalculate;
 import com.shanghai.wifishare.usermgmt.service.UserDeviceService;
+import com.shanghai.wifishare.wifimgmt.domain.HotspotConnect;
+import com.shanghai.wifishare.wifimgmt.repository.HotspotConnectRepository;
+import com.shanghai.wifishare.wifimgmt.service.HotSpotConnectService;
 import com.shanghai.wifishare.wifimgmt.service.HotSpotService;
 import com.wifishared.common.data.dto.orderdetail.OrderDetailReqBody;
 import com.wifishared.common.data.dto.user.LoginReqBody;
@@ -64,7 +67,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	
 	@Autowired
 	UserDeviceService userDeviceService;
-
+	
+	@Autowired
+	HotspotConnectRepository hotspotConnectRepository;
 	
 	@Override
 	public GeneralContentResult<String> createOrderDetail(String authorization,OrderDetailReqBody orderDetailReqBody) {
@@ -156,6 +161,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		//新增或者更新结束订单
 		OrderDetail orderDetailTmp = orderDetailRepository.findByOrderIdAndOrderDetailType(orderDetailReqBody.getOrderMergerId(),OrderMgmtConstant.ORDER_DETAIL_TYPE_END);
 		OrderDetail orderDetail = null;
+		//下面的if逻辑需要修改，无需对数据库进行新增和更新。
 		if(orderDetailTmp==null) {
 			//新增
 			orderDetail = OrderDetailConverter.hotSpotReqBody2Hotspotconfig(orderDetailReqBody);
@@ -163,7 +169,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			orderDetail.setDeviceId(deviceId);
 			orderDetail.setOrderId(orderDetailReqBody.getOrderMergerId());
 			orderDetail.setUpdateTime(timestamp);
-			orderDetail = orderDetailRepository.save(orderDetail);
+			//orderDetail = orderDetailRepository.save(orderDetail);
 			if(StringUtils.isEmpty(orderDetail.getId())) {
 				//没插入数据。回滚
 				throw new RuntimeException();
@@ -176,7 +182,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			orderDetail.setCreator(orderDetailTmp.getCreator());
 			orderDetail.setDeviceId(orderDetailTmp.getDeviceId());
 			orderDetail.setUpdateTime(timestamp);
-			orderDetail = orderDetailRepository.save(orderDetail);
+			//orderDetail = orderDetailRepository.save(orderDetail);
 			if(StringUtils.isEmpty(orderDetail.getId())) {
 				//没插入数据。回滚
 				throw new RuntimeException();
@@ -216,6 +222,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 					orderDetailHistoryRepository.save(beginHis);
 					orderDetailHistoryRepository.save(endHis);
 					orderMergeHistoryRepository.save(mergeHis);
+					//存储wifi连接表
+					HotspotConnect connect = new HotspotConnect(); 
+					connect.setHotspotconfigId(orderMerge.getHotspotconfigId());
+					connect.setDeviceId(orderMerge.getDeviceId());
+					connect.setUserId(orderMerge.getCreator());
+					hotspotConnectRepository.save(connect);
+					
 				}else {
 					log.warn("merge order fail,can not find hotspot,orderId:{}",orderMergeId);
 				}
