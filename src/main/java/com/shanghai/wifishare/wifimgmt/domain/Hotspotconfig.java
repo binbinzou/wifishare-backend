@@ -33,7 +33,7 @@ public class Hotspotconfig implements Serializable {
 	private short charingModule;
 
 	@Column(name="CHARING_STANDARD")
-	private short charingStandard;
+	private double charingStandard;
 
 	@Column(name="CREATE_TIME",insertable=false,updatable=false)
 	private Timestamp createTime;
@@ -92,11 +92,11 @@ public class Hotspotconfig implements Serializable {
 		this.charingModule = charingModule;
 	}
 
-	public short getCharingStandard() {
-		return this.charingStandard;
+	public double getCharingStandard() {
+		return charingStandard;
 	}
 
-	public void setCharingStandard(short charingStandard) {
+	public void setCharingStandard(double charingStandard) {
 		this.charingStandard = charingStandard;
 	}
 

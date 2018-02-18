@@ -19,7 +19,7 @@ public class HotspotconfigConverter {
 		hotspotconfig.setSsid(reqBody.getSsid());
 		hotspotconfig.setPassword(reqBody.getPassword());
 		hotspotconfig.setCharingModule(Short.parseShort(reqBody.getCharingModule()));
-		hotspotconfig.setCharingStandard(Short.parseShort(reqBody.getCharingStandard()));
+		hotspotconfig.setCharingStandard(Double.parseDouble(reqBody.getCharingStandard()));
 		hotspotconfig.setHotspotType(Short.parseShort(reqBody.getHotSpotType()));
 		hotspotconfig.setLat(Double.parseDouble(reqBody.getLat()));
 		hotspotconfig.setLng(Double.parseDouble(reqBody.getLng()));
