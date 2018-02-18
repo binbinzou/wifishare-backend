@@ -1,5 +1,7 @@
 package com.shanghai.wifishare.ordermgmt.service.impl;
+import org.springframework.stereotype.Component;
 
+/*
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,14 @@ import com.shanghai.wifishare.ordermgmt.utils.OrderMergeDataCalculate;
 import com.shanghai.wifishare.wifimgmt.service.HotSpotService;
 import com.wifishared.common.data.otd.hotspot.HotSpotRspBody;
 import com.wifishared.common.framework.resultobj.GeneralContentResult;
-
+*/
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
 public class OrderConsumer {
 
-	@Autowired
+	/*@Autowired
 	OrderDetailRepository orderDetailRepository;
 
 	@Autowired
@@ -49,9 +51,9 @@ public class OrderConsumer {
 	@Transactional
 	public void receiveQueue(String orderMergeId) {
 		log.info("receive merge order,orderId:{}",orderMergeId);
-		/**
+		*//**
 		 * 1、拿出订单细节表的两条数据，以及自身的订单数据 2、计算订单数据 3、将三条数据移到相应的历史表中。
-		 */
+		 *//*
 		OrderDetail begin = null;
 		OrderDetail end = null;
 		List<OrderDetail> orderDetails = orderDetailRepository.findByOrderId(orderMergeId);
@@ -91,5 +93,5 @@ public class OrderConsumer {
 			log.warn("merge order fail,can not find order detail,orderId:{}",orderMergeId);
 		}
 	}
-
+*/
 }
