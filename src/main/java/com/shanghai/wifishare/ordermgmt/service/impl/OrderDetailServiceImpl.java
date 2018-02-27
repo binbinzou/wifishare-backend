@@ -95,6 +95,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			OrderDetail orderDetail = OrderDetailConverter.hotSpotReqBody2Hotspotconfig(orderDetailReqBody);
 			orderDetail.setCreator(userId);
 			orderDetail.setDeviceId(deviceId);
+			orderDetail.setUpdateTime(timestamp);
 			orderDetail.setOrderId(orderMerge.getId());
 			orderDetail = orderDetailRepository.save(orderDetail);
 			if(StringUtils.isEmpty(orderMerge.getId())||StringUtils.isEmpty(orderDetail.getId())) {
@@ -111,6 +112,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 				OrderDetail orderDetail = OrderDetailConverter.hotSpotReqBody2Hotspotconfig(orderDetailReqBody);
 				orderDetail.setCreator(userId);
 				orderDetail.setDeviceId(deviceId);
+				orderDetail.setUpdateTime(timestamp);
 				orderDetail.setOrderId(orderDetailReqBody.getOrderMergerId());
 				orderDetail = orderDetailRepository.save(orderDetail);
 				if(StringUtils.isEmpty(orderDetail.getId())) {
@@ -124,6 +126,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 				orderDetail.setOrderId(orderDetailTmp.getOrderId());
 				orderDetail.setCreator(orderDetailTmp.getCreator());
 				orderDetail.setDeviceId(orderDetailTmp.getDeviceId());
+				orderDetail.setUpdateTime(timestamp);
 				orderDetail = orderDetailRepository.save(orderDetail);
 				if(StringUtils.isEmpty(orderDetail.getId())) {
 					//没插入数据。回滚
